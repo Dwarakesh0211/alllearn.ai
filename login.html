@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - AllLearn.ai</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .background {
+      background-image: url('bg.jpg'); /* Replace with your image path */
+      background-size: cover;
+      background-position: center;
+      filter: brightness(50%);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .top-logo {
+      position: fixed;
+      top: 10px;
+      left: 20px;
+      z-index: 998;
+    }
+
+    .top-logo img {
+      width: 120px;
+      height: auto;
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+      text-align: center;
+    }
+
+    .section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    input {
+      padding: 10px;
+      width: 250px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .separator {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+
+  <div class="top-logo">
+    <img src="logo.png" alt="AllLearn.ai Logo">
+  </div>
+
+  <div class="main-content">
+    <div class="section" id="loginSection">
+      <button>
+        <img src="google.png" alt="Google logo" style="height: 20px; vertical-align: middle; margin-right: 8px;">
+        Continue with Google
+      </button>
+      <div class="separator">or</div>
+      <input type="text" id="Username" placeholder="Username" />
+      <input type="password" id="password" placeholder="Password" />
+      <button id="signinbtn">Sign In</button>
+    </div>
+  </div>
+  <script>
+    document.getElementById("signinbtn").addEventListener("click", function () {
+      const Username = document.getElementById("Username").value;
+      const password = document.getElementById("password").value;
+  
+      if (!Username || !password) {
+        alert("Please fill in all fields.");
+        return;
+      }
+  
+      // Simulated login success (no actual authentication)
+      alert("Login Successful");
+      window.location.href = "second.html";
+    });
+  </script>  
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AllLearn.ai - Video</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    .background {
+      background-image: url('bg.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(50%);
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .top-logo {
+      position: fixed;
+      top: 10px;
+      left: 20px;
+      z-index: 998;
+    }
+
+    .top-logo img {
+      width: 120px;
+      height: auto;
+    }
+
+    .container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+
+    .video-wrapper {
+      position: relative;
+      max-width: 800px;
+      width: 90%;
+      margin-bottom: 20px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 450px;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.3);
+    }
+
+    .nav-buttons {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 30px;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .nav-buttons.left {
+      left: -40px;
+    }
+
+    .nav-buttons.right {
+      right: -40px;
+    }
+
+    .language-buttons, .resource-links {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .reaction-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.reaction-buttons button {
+  background-color: #28a745;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.reaction-buttons button:last-child {
+  background-color: #dc3545;
+}
+
+.reaction-buttons button:hover:first-child {
+  background-color: #218838;
+}
+
+.reaction-buttons button:hover:last-child {
+  background-color: #c82333;
+}
+
+
+    button, .resource-links a {
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-decoration: none;
+    }
+
+    button:hover, .resource-links a:hover {
+      background-color: #0056b3;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+
+  <!-- Logo -->
+  <div class="top-logo">
+    <img src="logo.png" alt="AllLearn.ai Logo">
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <h1 id="videoTitle">Loading...</h1>
+
+    <!-- Video Carousel -->
+    <div class="video-wrapper">
+      <button class="nav-buttons left" onclick="previousVideo()">&#8592;</button>
+      <iframe id="videoFrame" src="" allowfullscreen></iframe>
+      <button class="nav-buttons right" onclick="nextVideo()">&#8594;</button>
+    </div>
+
+    <div class="reaction-buttons">
+      <button onclick="handleReaction('like')">👍 Like</button>
+      <button onclick="handleReaction('dislike')">👎 Dislike</button>
+    </div>
+
+    <!-- Language Selection -->
+    <div class="language-buttons">
+      <button onclick="changeLanguage('english')">English</button>
+      <button onclick="changeLanguage('tamil')">Tamil</button>
+      <button onclick="changeLanguage('hindi')">Hindi</button>
+      <button onclick="changeLanguage('kannada')">Kannada</button>
+    </div>
+
+    <!-- Resource Links -->
+    <div class="resource-links">
+      <a href="quiz.html">Quiz</a>
+      <a href="qa.html">Q/A</a>
+      <a href="notes.html">Notes</a>
+    </div>
+  </div>
+
+  <script>
+    const videoLinks = {
+      physics: {
+        Optics: {
+          english: [
+            "https://www.youtube.com/embed/mYStZlUL2OM?si=VKU4RF2YEzeJH9uC",
+            "https://www.youtube.com/embed/gYsIPpQxXuk?si=FN9GEwe8I2TXCikv",
+            "https://www.youtube.com/embed/x1c9xwTBxFM?si=rwT_bD0CgtOwEi3f",
+
+          ],
+          tamil: [
+            "https://www.youtube.com/embed/5X8cCD2hqQ4?si=l6MWcheOSbJWv-Dq",
+            "https://www.youtube.com/embed/la-4Yew5VRk?si=C_o0Satiao7FvmVg",
+            "https://www.youtube.com/embed/BrMB6sc8T98?si=GHATe-2b5W1FTYbi",
+          ], 
+          hindi: [
+            "https://www.youtube.com/embed/s8YU4UqQDvc?si=rrVSMle_IgJ5U9mn",
+            "https://www.youtube.com/embed/6M2F6chBNfI?si=edcyqXc_pbIG9R7J"
+          ],
+          kannada: [
+            "https://www.youtube.com/embed/Oh4m8Ees-3Q?si=olp15hxJjq2HIdwZ",
+            "https://www.youtube.com/embed/4m4G3vN7QoM",
+
+          ]
+        }
+      },
+
+      // Add other subjects/topics similarly
+    };
+
+    let subject = "";
+    let topic = "";
+    let currentLanguage = "english";
+    let currentIndex = 0;
+
+    window.onload = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      subject = urlParams.get("subject");
+      topic = urlParams.get("topic");
+
+      document.getElementById("videoTitle").textContent = `${topic} (${subject})`;
+
+      loadVideo(currentLanguage);
+    };
+
+    function loadVideo(language) {
+      const videoFrame = document.getElementById("videoFrame");
+      currentLanguage = language;
+      currentIndex = 0;
+
+      const linkData = videoLinks[subject]?.[topic]?.[language];
+
+      if (Array.isArray(linkData)) {
+        videoFrame.src = linkData[0];
+      } else if (typeof linkData === "string") {
+        videoFrame.src = linkData;
+      } else {
+        videoFrame.src = "";
+        alert("No video available in this language.");
+      }
+    }
+
+    function nextVideo() {
+      const linkData = videoLinks[subject]?.[topic]?.[currentLanguage];
+      if (Array.isArray(linkData) && currentIndex < linkData.length - 1) {
+        currentIndex++;
+        document.getElementById("videoFrame").src = linkData[currentIndex];
+      }
+    }
+
+    function previousVideo() {
+      const linkData = videoLinks[subject]?.[topic]?.[currentLanguage];
+      if (Array.isArray(linkData) && currentIndex > 0) {
+        currentIndex--;
+        document.getElementById("videoFrame").src = linkData[currentIndex];
+      }
+    }
+
+    function changeLanguage(lang) {
+      loadVideo(lang);
+    }
+  </script>
+</body>
+</html>

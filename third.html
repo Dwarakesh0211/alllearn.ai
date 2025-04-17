@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AllLearn.ai - Topics</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    .background {
+      background-image: url('bg.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(50%);
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .top-logo {
+      position: fixed;
+      top: 10px;
+      left: 20px;
+      z-index: 998;
+    }
+
+    .top-logo img {
+      width: 120px;
+      height: auto;
+    }
+
+    .container {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 10px 0;
+    }
+
+    a, button {
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    a:hover, button:hover {
+      background-color: #0056b3;
+    }
+
+    .back-link {
+      margin-top: 25px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background -->
+  <div class="background"></div>
+
+  <!-- Logo -->
+  <div class="top-logo">
+    <img src="logo.png" alt="AllLearn.ai Logo">
+  </div>
+
+  <!-- Content -->
+  <div class="container">
+    <h1 id="subjectTitle">Subject Topics</h1>
+    <ul id="topicsList"></ul>
+    <a class="back-link" href="second.html">Back to Subjects</a>
+  </div>
+
+  <script>
+    const subjects = {
+      maths: ["Algebra", "Calculus", "Geometry", "Statistics"],
+      physics: ["Mechanics", "Optics", "Thermodynamics", "Electromagnetism"],
+      chemistry: ["Organic Chemistry", "Inorganic Chemistry", "Physical Chemistry", "Biochemistry"],
+      biology: ["Genetics", "Cell Biology", "Ecology", "Anatomy"]
+    };
+
+    window.onload = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const subject = urlParams.get("subject");
+
+      const title = document.getElementById("subjectTitle");
+      const list = document.getElementById("topicsList");
+
+      if (subject && subjects[subject]) {
+        title.textContent = `${subject.charAt(0).toUpperCase() + subject.slice(1)} Topics`;
+
+        subjects[subject].forEach(topic => {
+          const li = document.createElement("li");
+          const link = document.createElement("a");
+          link.href = `fourth.html?subject=${subject}&topic=${encodeURIComponent(topic)}`;
+          link.textContent = topic;
+          li.appendChild(link);
+          list.appendChild(li);
+        });
+      } else {
+        title.textContent = "Subject Not Found";
+        list.innerHTML = `<li><a href="second.html">Go Back</a></li>`;
+      }
+    };
+  </script>
+</body>
+</html>

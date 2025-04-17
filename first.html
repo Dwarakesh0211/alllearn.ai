@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AllLearn.ai</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    .background {
+      background-image: url('bg.jpg'); /* Replace with your image path */
+      background-size: cover;
+      background-position: center;
+      filter: brightness(50%);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .logo-screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #000000aa;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      animation: fadeOut 2s forwards;
+    }
+
+    .logo-screen img {
+      width: 150px;
+    }
+
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+
+    .main-content, .second-page {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+      text-align: center;
+    }
+
+    .buttons, .second-buttons {
+      display: flex;
+      gap: 20px;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .input-group {
+      margin: 10px 0;
+    }
+
+    input {
+      padding: 10px;
+      width: 250px;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+    }
+
+    .separator {
+      margin: 15px 0;
+    }
+
+    .section-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      color: white;
+      text-align: center;
+    }
+    .top-logo {
+  position: fixed;
+  align-items: center;
+  top: 10px;
+  left: 20px;
+  z-index: 998;
+    }
+ 
+   .top-logo img {
+  width: 120px;
+  height: auto;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+
+  <!-- Logo Splash Screen -->
+  <div class="logo-screen">
+    <img src="logo.png" alt="AllLearn.ai Logo"> <!-- Replace with your logo path -->
+  </div>
+  <!-- First Page -->
+  <div class="main-content" class="top-logo" id="mainContent">
+    <div class="buttons">
+      <img src="logo.png" alt="AllLearn.ai Logo">
+      <!--<a href="second.html?section=subject"><button>Select Your Subject</button></a>-->
+      <a href="login.html?section=login"><button>Login</button></a>
+      <a href="register.html?section=register"><button>New User? Register</button></a>
+    </div>
+  </div>
+
+  <script>
+    // Show main content after logo fades
+    window.onload = () => {
+  setTimeout(() => {
+    document.getElementById("mainContent").style.display = "flex";
+
+    const params = new URLSearchParams(window.location.search);
+    const section = params.get("section");
+
+    if (section) {
+      document.getElementById("mainContent").style.display = "none";
+      document.getElementById("secondPage").style.display = "flex";
+
+      const sections = ["subject", "login", "register"];
+      sections.forEach(id => {
+        document.getElementById(id + "Section").style.display = (id === section) ? "flex" : "none";
+      });
+    }
+  }, 2000);
+};
+  </script>
+</body>
+</html>
